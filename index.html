@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FLAMES Relationship Finder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="background-hearts" aria-hidden="true">
+        <span>❤️</span>
+        <span>💖</span>
+        <span>💕</span>
+        <span>💗</span>
+        <span>💘</span>
+    </div>
+
+    <main class="app-shell">
+        <section class="glass-card">
+            <h1>❤️ FLAMES Relationship Finder ❤️</h1>
+            <p class="subtitle">Discover a dreamy relationship result in a beautiful, modern experience.</p>
+
+            <form id="flames-form" novalidate>
+                <div class="input-group">
+                    <label for="firstName">Enter First Name</label>
+                    <input id="firstName" name="firstName" type="text" placeholder="Rahul" />
+                </div>
+
+                <div class="input-group">
+                    <label for="secondName">Enter Second Name</label>
+                    <input id="secondName" name="secondName" type="text" placeholder="Priya" />
+                </div>
+
+                <div class="button-row">
+                    <button type="submit" class="primary-btn">Find Relationship</button>
+                    <button type="button" class="secondary-btn" id="resetBtn">Reset</button>
+                </div>
+
+                <p id="errorMessage" class="error-message" aria-live="polite"></p>
+            </form>
+
+            <section class="result-card" id="resultCard" aria-live="polite">
+                <h2>Your Result</h2>
+                <div class="result-placeholder">
+                    <p>Fill in both names and click the button to reveal your relationship.</p>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
