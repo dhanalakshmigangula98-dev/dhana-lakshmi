@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FLAMES Relationship Finder</title>
+    <title>AI 5-Subject Study Assistant</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -13,46 +13,164 @@
 </head>
 
 <body>
-    <div class="background-hearts" aria-hidden="true">
-        <span>❤️</span>
-        <span>💖</span>
-        <span>💕</span>
-        <span>💗</span>
-        <span>💘</span>
-    </div>
+    <div class="page-shell">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-icon">AI</div>
+                <div>
+                    <h1>AI 5-Subject Study Assistant</h1>
+                    <p>Learn. Understand. Prepare.</p>
+                </div>
+            </div>
+            <nav class="main-nav" aria-label="Primary navigation">
+                <button class="nav-link active" data-target="home">Home</button>
+                <button class="nav-link" data-target="subjects">Subjects</button>
+                <button class="nav-link" data-target="study">Study Assistant</button>
+                <button class="nav-link" data-target="bookmarks">Bookmarks</button>
+                <button class="nav-link" data-target="quiz">Quiz</button>
+                <button class="nav-link" data-target="about">About</button>
+            </nav>
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">☀️</button>
+        </header>
 
-    <main class="app-shell">
-        <section class="glass-card">
-            <h1>❤️ FLAMES Relationship Finder ❤️</h1>
-            <p class="subtitle">Discover a dreamy relationship result in a beautiful, modern experience.</p>
-
-            <form id="flames-form" novalidate>
-                <div class="input-group">
-                    <label for="firstName">Enter First Name</label>
-                    <input id="firstName" name="firstName" type="text" placeholder="Rahul" />
+        <main>
+            <section id="home" class="page-panel active-panel">
+                <div class="hero-card glass-card hero-grid">
+                    <div>
+                        <h2>Smart college study support for 5 major subjects</h2>
+                        <p>Search topics, read clear explanations, bookmark important concepts, and practice quizzes in
+                            one frontend app.</p>
+                        <div class="hero-actions">
+                            <button class="card-btn" data-target="subjects">Explore Subjects</button>
+                            <button class="card-btn secondary" data-target="study">Start Studying</button>
+                        </div>
+                    </div>
+                    <div class="hero-metrics">
+                        <div class="metric-card">
+                            <span>5 Subjects</span>
+                            <strong>All topic domains</strong>
+                        </div>
+                        <div class="metric-card">
+                            <span>Topic Search</span>
+                            <strong>Case-insensitive and smart</strong>
+                        </div>
+                        <div class="metric-card">
+                            <span>Bookmarks</span>
+                            <strong>Save important notes</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <label for="secondName">Enter Second Name</label>
-                    <input id="secondName" name="secondName" type="text" placeholder="Priya" />
+                <div class="subject-grid" id="subjectCardGrid"></div>
+            </section>
+
+            <section id="subjects" class="page-panel">
+                <div class="section-heading">
+                    <span>Subjects</span>
+                    <h2>Choose a subject</h2>
                 </div>
+                <div class="subject-grid" id="subjectTileGrid"></div>
+            </section>
 
-                <div class="button-row">
-                    <button type="submit" class="primary-btn">Find Relationship</button>
-                    <button type="button" class="secondary-btn" id="resetBtn">Reset</button>
+            <section id="study" class="page-panel">
+                <div class="section-heading">
+                    <span>Study Assistant</span>
+                    <h2 id="studyTitle">Select a subject to begin</h2>
                 </div>
+                <div class="study-shell">
+                    <div class="study-sidebar glass-card">
+                        <div class="topic-search-panel">
+                            <label for="topicSearch">Search any topic</label>
+                            <div class="search-row">
+                                <input id="topicSearch" type="text" placeholder="Search any topic..."
+                                    autocomplete="off" />
+                                <button id="searchBtn" class="card-btn">Search</button>
+                            </div>
+                            <ul id="suggestionsList" class="suggestion-list"></ul>
+                        </div>
+                        <div class="status-panel">
+                            <div class="mini-card">
+                                <strong>Selected subject</strong>
+                                <p id="selectedSubjectLabel">None</p>
+                            </div>
+                            <div class="mini-card">
+                                <strong>Recent searches</strong>
+                                <div id="recentSearches"></div>
+                            </div>
+                            <div class="mini-card">
+                                <strong>Bookmarks</strong>
+                                <div id="bookmarkPreview"></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <p id="errorMessage" class="error-message" aria-live="polite"></p>
-            </form>
+                    <div class="study-content">
+                        <div class="explanation-header glass-card">
+                            <div>
+                                <h3 id="topicHeader">Start studying by selecting a subject and searching a topic.</h3>
+                                <p id="topicSubheader">The explanation area will show detailed content for the selected
+                                    topic.</p>
+                            </div>
+                            <button id="bookmarkBtn" class="bookmark-btn" disabled>☆ Bookmark</button>
+                        </div>
 
-            <section class="result-card" id="resultCard" aria-live="polite">
-                <h2>Your Result</h2>
-                <div class="result-placeholder">
-                    <p>Fill in both names and click the button to reveal your relationship.</p>
+                        <div class="mode-selector glass-card" id="modeSelector">
+                            <button class="mode-btn active-mode" data-mode="simple">Simple Explanation</button>
+                            <button class="mode-btn" data-mode="detailed">Detailed Explanation</button>
+                            <button class="mode-btn" data-mode="exam">Exam Answer</button>
+                            <button class="mode-btn" data-mode="notes">Short Notes</button>
+                            <button class="mode-btn" data-mode="example">Example</button>
+                            <button class="mode-btn" data-mode="quiz">Quiz Me</button>
+                        </div>
+
+                        <div id="explanationContent" class="explanation-content glass-card">
+                            <p class="empty-state">Search a topic to get a clear explanation here.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
-        </section>
-    </main>
+
+            <section id="bookmarks" class="page-panel">
+                <div class="section-heading">
+                    <span>Bookmarks</span>
+                    <h2>Saved topics for fast revision</h2>
+                </div>
+                <div class="bookmarks-grid" id="bookmarkList"></div>
+            </section>
+
+            <section id="quiz" class="page-panel">
+                <div class="section-heading">
+                    <span>Quiz</span>
+                    <h2>Practice and review your knowledge</h2>
+                </div>
+                <div class="quiz-shell glass-card">
+                    <div class="quiz-meta">
+                        <div>
+                            <strong>Current subject</strong>
+                            <p id="quizSubjectLabel">Any subject</p>
+                        </div>
+                        <div>
+                            <strong>Available questions</strong>
+                            <p id="quizCountLabel">0</p>
+                        </div>
+                        <button id="startQuizBtn" class="card-btn">Start Quiz</button>
+                    </div>
+                    <div id="quizArea" class="quiz-area"></div>
+                </div>
+            </section>
+
+            <section id="about" class="page-panel">
+                <div class="section-heading">
+                    <span>About</span>
+                    <h2>Frontend-only study assistant for college subjects</h2>
+                </div>
+                <div class="about-card glass-card">
+                    <p>This web application uses only HTML, CSS, and JavaScript. It helps students search important
+                        topics, read structured explanations, bookmark key concepts, and take quizzes.</p>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
